@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebShop.Data;
 using WebShop.Models;
 using WebShop.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebShop.Controllers
 {
@@ -104,6 +105,7 @@ namespace WebShop.Controllers
                 }).ToList();
             return View(viewModel);
         }
+        [Authorize(Roles = "Admin, Product Manager")]
         public IActionResult Edit(int Id)
         {
             var viewModel = new ProductEditViewModel();
@@ -120,7 +122,7 @@ namespace WebShop.Controllers
 
             return View(viewModel);
         }
-
+        [Authorize(Roles = "Admin, Product Manager")]
         [HttpPost]
         public IActionResult Edit(int Id, ProductEditViewModel viewModel)
         {
@@ -153,7 +155,7 @@ namespace WebShop.Controllers
             }));
             return list;
         }
-
+        [Authorize(Roles = "Admin, Product Manager")]
         public IActionResult NewProduct()
         {
             var viewModel = new ProductNewProductViewModel();
@@ -161,7 +163,7 @@ namespace WebShop.Controllers
 
             return View(viewModel);
         }
-
+        [Authorize(Roles = "Admin, Product Manager")]
         [HttpPost]
         public IActionResult NewProduct(ProductNewProductViewModel viewModel)
         {

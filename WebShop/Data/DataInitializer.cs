@@ -14,9 +14,31 @@ namespace WebShop.Data
             dbContext.Database.Migrate();
 
             SeedRoles(dbContext);
+            SeedUsers(userManager);
 
             SeedProductCategories(dbContext);
             SeedProducts(dbContext);
+        }
+
+        private static void SeedUsers(UserManager<IdentityUser> userManager)
+        {
+            AddUserIfNotExists(userManager, "stefan.holmberg@systementor.se", "Hejsan123#", new string[]{"Admin"});
+            AddUserIfNotExists(userManager, "stefan.holmbergmanager@systementor.se", "Hejsan123#", new string[]{"Product Manager"});
+        }
+
+        private static void AddUserIfNotExists(UserManager<IdentityUser> userManager,
+           string userName, string password, string[] roles)
+        {
+            if (userManager.FindByEmailAsync(userName).Result != null) return;
+
+            var user = new IdentityUser
+            {
+                UserName = userName,
+                Email = userName,
+                EmailConfirmed = true
+            };
+            var result = userManager.CreateAsync(user, password).Result;
+            var r = userManager.AddToRolesAsync(user, roles).Result;
         }
 
         private static void SeedRoles(ApplicationDbContext dbContext)
@@ -26,6 +48,13 @@ namespace WebShop.Data
             {
                 dbContext.Roles.Add(new IdentityRole { Name = "Admin", NormalizedName = "Admin" });
             }
+
+            role = dbContext.Roles.FirstOrDefault(r => r.Name == "Product Manager");
+            if (role == null)
+            {
+                dbContext.Roles.Add(new IdentityRole { Name = "Product Manager", NormalizedName = "Product Manager" });
+            }
+            dbContext.SaveChanges();
         }
 
         private static void SeedProductCategories(ApplicationDbContext dbContext)
