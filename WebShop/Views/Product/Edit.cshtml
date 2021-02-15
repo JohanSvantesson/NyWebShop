@@ -1,0 +1,55 @@
+﻿@model WebShop.ViewModels.ProductEditViewModel
+
+@{
+    ViewData["Title"] = "Alla produkter";
+}
+<section class="py-5">
+    <div class="row">
+        <div class="col-lg-12 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Edit Produkt</h3>
+                </div>
+
+                <div class="card-body">
+                    <form method="post" asp-controller="Product" asp-action="Edit">
+
+                        <div class="form-group">
+                            <label asp-for="Name">Namn</label>
+                            <input class="form-control" asp-for="Name">
+                            <span asp-validation-for="Name"></span>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label asp-for="Description">Beskrivning</label>
+                            <textarea rows="3" cols="30" asp-for="Description" class="form-control"></textarea>
+                            <span asp-validation-for="Description"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Price">Pris</label>
+                            <input class="form-control" asp-for="Price">
+                            <span asp-validation-for="Price"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="SelectedCategoryId">Kategori</label>
+                            <select class="form-control"
+                                    asp-for="SelectedCategoryId"
+                                    asp-items="Model.AllCategories"></select>
+                            <span asp-validation-for="ProductCategory"></span>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,33 @@
+﻿@model WebShop.ViewModels.ProductViewTargetProduct
+
+@{
+    ViewData["Title"] = "Alla produkter";
+}
+
+<div class="container text-center">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+
+                <th scope="col">Namn</th>
+                <th scope="col">Beskrivning</th>
+                <th scope="col">Pris</th>
+                <th scope="col">Kategori</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td>@Model.Name</td>
+                <td>@Model.Description</td>
+                <td>@Model.Price</td>
+                <td>@Model.ProductCategory.Name</td>
+                
+            </tr>
+           
+
+
+        </tbody>
+    </table>
+</div>
