@@ -1,8 +1,9 @@
 ﻿@model WebShop.ViewModels.HomeIndexViewModel
-@{
-    ViewData["Title"] = "Home Page";
-}
+@{ ViewData["Title"] = "Home Page"; }
 
+
+
+ 
 
 <div class="container text-center">
     <table class="table table-hover">
@@ -10,23 +11,28 @@
             <tr>
 
                 <th scope="col">Namn</th>
-                <th scope="col">Alternativ</th>
+                <th scope="col">Visa Produkter</th>
+                <th scope="col">Editera Kategori</th>
 
 
             </tr>
         </thead>
         <tbody>
 
-        @foreach (var category in Model.ProductCategories)
-        {
-            <tr>
+            @foreach (var category in Model.ProductCategories)
+            {
+<tr>
 
-                <td>@category.Name</td>
-                <td><a asp-controller="Product" asp-action="ViewProducts" asp-route-id="@category.Id" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Visa Produkter</a></td>
-            </tr>
-        }
+    <td>@category.Name</td>
+    <td><a asp-controller="Product" asp-action="ViewProducts" asp-route-id="@category.Id" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Visa Produkter</a></td>
+    <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Edit</a></td>
+</tr>
+}
 
 
         </tbody>
     </table>
 </div>
+<a asp-controller="Home" asp-action="NewCategory" class="btn btn-secondary" role="button" aria-pressed="true">
+    Ny Kategori
+</a>
