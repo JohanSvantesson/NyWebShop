@@ -44,7 +44,7 @@ namespace WebShop.Controllers
         {
             var viewModel = new ProductViewTargetProduct();
             var dbProduct = _dbContext.Product.Include(r => r.ProductCategory)
-                .FirstOrDefault(r => r.Id == Id);
+                .First(r => r.Id == Id);
 
             viewModel.Id = dbProduct.Id;
             viewModel.Name = dbProduct.Name;
@@ -67,22 +67,6 @@ namespace WebShop.Controllers
                                 ProductCategory = prod.ProductCategory
 
                             }).ToList();
-
-            //var viewModel = new ViewProductViewModel();
-            //var model = new ProductViewProductViewModel();
-
-            //var dbProducts = _dbContext.Product.Include(r=> r.ProductCategory)
-            //    .Where(r => r.ProductCategory.Id == Id).ToList();
-
-            //foreach (var product in dbProducts)
-            //{
-            //    viewModel.Id = product.Id;
-            //    viewModel.Name = product.Name;
-            //    viewModel.Description = product.Description;
-            //    viewModel.Price = product.Price;
-            //    viewModel.ProductCategory = product.ProductCategory;
-            //    model.Products.Add(viewModel);
-            //}
 
             return View(viewModel);
         }

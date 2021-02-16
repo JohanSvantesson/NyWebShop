@@ -12,12 +12,12 @@ namespace WebShop.ViewModels
     {
         public int Id { get; set; }
         [Required]
-        [MaxLength(30)]
+        [MaxLength(50)]
         [MinLength(1)]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(150)]
+        [MaxLength(100)]
         [MinLength(1)]
         public string Description { get; set; }
 
